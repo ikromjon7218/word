@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+    <style>
+body{
+  margin: 0;
+  padding: 0;
+  background: #0a0421;
+}
+.middle{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.btn{
+  position: relative;
+  display: block;
+  color: white;
+  font-size: 14px;
+  font-family: "montserrat";
+  text-decoration: none;
+  margin: 30px 0;
+  border: 2px solid #ff7675;
+  padding: 14px 60px;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: 1s all ease;
+}
+.btn::before{
+  background: #ff7675;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: -1;
+  transition: all 0.6s ease;
+}
+
+.btn1::before{
+  width: 0%;
+  height: 100%;
+}
+
+.btn1:hover::before{
+  width: 100%;
+}
+    </style>
+</head>
+<body bgcolor="#008000">
+  <div class="middle">
+    <h1 style="color:rgb(0, 255, 98); text-align: center;"> The number of all your tests: {{i.test}}</p></h1>
+    <h2 ><p style="color:rgb(0, 255, 98); text-align: center;">Percentage: {{p}}</h2>
+ 
+          
+  <form method="post">{% csrf_token %}
+    <lebel style="color: rgba(209, 249, 101, 0.99);">Name: </lebel>
+    <input type="text" name="name" value="{{i.name}}">
+    <br>
+    <lebel style="color: rgba(209, 249, 101, 0.99);">Phone number: </lebel>
+    <input type="number" name="tel_number" value="{{i.tel_number}}">
+    <br>
+    <label style="color: rgba(209, 249, 101, 0.99);">Year of birth:</label>
+    <input type="number" name="year_of_birth" value="{{i.year_of_birth}}">
+    <button type="submit">Saqlash</button>
+  </h3>
+  <div style="display: flex;">
+  </div>   
+  </form>
+    
+      <br>
+    <br>
+
+    <h1><a href="/home_page/" class="btn btn1">🏠 home 🏠</a></h1>
+
+    <h3><a style="color: rgb(62, 70, 1);" href="/logout/">Log out</a></h3>
+
+    <h1><a style="color: rgb(62, 70, 1);" href="/about/">Information about the program</a></h1>
+
+  </div>
+  <!-- <h3><a href="/docs/"  style="color:rgba(63, 84, 0, 0.993);"> API swagger docs</a></h3> -->
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <style>
+body{
+  margin: 0;
+  padding: 0;
+  background: #0a0421;
+}
+.middle{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.btn{
+  position: relative;
+  display: block;
+  color: white;
+  font-size: 14px;
+  font-family: "montserrat";
+  text-decoration: none;
+  margin: 30px 0;
+  border: 2px solid #ff7675;
+  padding: 14px 60px;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: 1s all ease;
+}
+.btn::before{
+  background: #ff7675;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: -1;
+  transition: all 0.6s ease;
+}
+
+.btn1::before{
+  width: 0%;
+  height: 100%;
+}
+
+.btn1:hover::before{
+  width: 100%;
+}
+    </style>
+</head>
+<body bgcolor="#008000">
+ 
+  <div class="middle">
+
+    
+    <h2 ><p style="color:rgba(251, 251, 0, 0.865); text-align: center;">On this site, you can memorize Words by Test or you can recall the memorized words.</h2><h1 style="color:rgb(35, 210, 0); text-align: center;">Welcome✋ !!!</p></h1>
+    <br>
+    <br>
+    <a href="/4000_essential_english_words/" class="btn btn1">📚 4000 Essential English Words 📚</a>
+    <!-- <a href="" class="btn btn1">Talabalar 👨‍🎓</a> -->
+    <!-- <h1><a href="/adminlar/" class="btn btn1">Adminlar 👨‍💻</a></h1> -->
+    <!-- <h1><a href="/mualliflar/" class="btn btn1">Mualiflar ✍️</a></h1> -->
+    <a href="/settings/" class="btn btn1">⚙️ Settings ⚙️</a>
+  </div>
+  <!-- <h3><a href="/docs/"  style="color:rgba(63, 84, 0, 0.993);"> API swagger docs</a></h3> -->
+
+</body>
+</html>
