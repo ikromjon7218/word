@@ -167,27 +167,43 @@
     <div class="aa1"><h3 style="color:#fff;">acceptance: {{acceptance}}</h3></div>
 
 
-    <form action="/test_1_essential/" method="post">{% csrf_token %}
+    <form action="/test_essential/" method="post">{% csrf_token %}
     <h1 style="color: blue; font-size: 100px;">{{word}}</h1>
     <div class="radio-buttons">
         <div class="form-group">
-          <input type="radio" id="male" name="soz" value="{{soz_1}}"/>
-          <label for="male">{{soz_1}}</label>
+          <input type="radio" id="male" name="soz" value="{{soz_0}}"/>
+          <label for="male">{{soz_0}}</label>
         </div>
       
         <div class="form-group">
-          <input type="radio" id="female" name="soz"  value="{{soz_2}}"/>
-          <label for="female">{{soz_2}}</label>
+          <input type="radio" id="female" name="soz"  value="{{soz_1}}"/>
+          <label for="female">{{soz_1}}</label>
         </div>
       
         <div class="form-group">
-          <input type="radio" id="other" name="soz"  value="{{soz_3}}"/>
-          <label for="other">{{soz_3}}</label>
+          <input type="radio" id="other" name="soz"  value="{{soz_2}}"/>
+          <label for="other">{{soz_2}}</label>
         </div>
       </div>
       <button class="btn third" type="submit">Submit</button>
     </form>
+   
+<script>
+  function validateForm() {
+    var radios = document.getElementsByName("soz");
+    var formValid = false;
+    var i = 0;
+    while (!formValid && i < radios.length) {
+      if (radios[i].checked) {
+        formValid = true;
+      }
+      i++;
+    }
+    if (!formValid) {
+      alert("Iltimos, birini tanlang!");
+    }
+    return formValid;
+  }
+</script>
 
-    
-</body>
-</html>
+</body></html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home Page</title>
+    <title>Result</title>
     <style>
 body{
   margin: 0;
@@ -54,15 +54,16 @@ body{
  
   <div class="middle">
 
-    <h1 style="color:rgb(251, 251, 0, 0.865); text-align: center;"> Your result:</p></h1>
+    <h1 style="color:rgb(251, 251, 0, 0.865); text-align: center;">{{description}}</p></h1>
 
     <h2 ><p style="color:rgb(0, 255, 98); text-align: center;">All test amounts: {{amount}}</h2>
         <h2 ><p style="color:rgb(0, 255, 98); text-align: center;">You made the right choices: {{acceptance}}</h2>
+          <h2 ><p style="color:rgb(0, 255, 98); text-align: center;">Test type: {{language}}</h2>
 
         {% if percentage > 99 %} 
           <h2 style="color:rgba(0, 254, 8, 0.985); text-align: center;">Well done, 💯 PERFECT 💯</p></h2>
         {% elif percentage > 80 %}
-          <h2 ><p style="color:rgb(0, 255, 98); text-align: center;">You made the right choices: {{percentage}} %</p></h2>
+          <h2 ><p style="color:rgb(38, 255, 0); text-align: center;">You made the right choices: {{percentage}} %</p></h2>
         {% elif percentage > 70 %}
           <h2 ><p style="color:rgb(188, 226, 0); text-align: center;">You made the right choices: {{percentage}} %</p></h2>
         {% elif percentage > 50 %}
@@ -70,14 +71,19 @@ body{
         {% else %}
           <h2 ><p style="color:rgb(226, 0, 0); text-align: center;">You made the right choices: 🆘 {{percentage}} % 🆘 </p></h2>  
         {% endif %}
-        
+
+            {% if mistakes %} 
+      <h2 ><p style="color:rgb(188, 226, 0); text-align: center;">Mistakes: </p></h2>
+            {% endif %} 
+        {% for i in mistakes %} 
+  <h2 ><p style="color:rgb(188, 226, 0); text-align: center;">{{i}}</p></h2>
+        {% endfor %}
           
           
-          <h2 ><p style="color:rgb(0, 255, 98); text-align: center;">Test type: {{language}}</h2>
     
       <br>
     <br>
-    <a href="/query_essential_1/" class="btn btn1">🔄 Play again 🔄</a>
+    <a href="/play_again/" class="btn btn1">🔄 Play again 🔄</a>
     <!-- <a href="" class="btn btn1">Talabalar 👨‍🎓</a> -->
     <!-- <h1><a href="/adminlar/" class="btn btn1">Adminlar 👨‍💻</a></h1> -->
     <!-- <h1><a href="/mualliflar/" class="btn btn1">Mualiflar ✍️</a></h1> -->

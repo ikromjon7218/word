@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
+# from django.core.exceptions import ValidationError
+from django.utils import timezone
+from django.conf import settings
 
 class Profil(models.Model):
     G = [('male', 'male'),
@@ -17,9 +19,22 @@ class Profil(models.Model):
     rejection = models.PositiveIntegerField(default=0)          # Number of incorrect selections
     percentage = models.PositiveSmallIntegerField(default=100)  # Percentage of correct choices, in a 100-point system
 
+    last_activity = models.DateTimeField(null=True, blank=True)
+    def update_activity(self):
+        self.last_activity = timezone.now()
+        self.save()
+
+    def is_online(self):
+        if self.last_activity is not None:
+            delta = timezone.now() - self.last_activity
+            return delta.total_seconds() < settings.USER_ONLINE_TIMEOUT
+        return False
+
+    def __str__(self):
+        return self.name
+
+
     # def clean(self):
     #     if self.year_of_birth < 1900:
     #         raise ValidationError("Must be older than 1900.")
 
-    def __str__(self):
-        return self.name

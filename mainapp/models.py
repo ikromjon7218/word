@@ -2,6 +2,12 @@ from django.db import models
 from userapp.models import Profil
 # from django.contrib.postgres.fields import ArrayField
 
+class Error(models.Model):
+    name = models.CharField(max_length=500)
+    description = models.CharField(max_length=500)
+    def __str__(self):
+        return self.name[:10]
+
 class Book(models.Model):
     name = models.CharField(max_length=32)      # full name
     about = models.CharField(max_length=1000)   # about the book
@@ -29,7 +35,8 @@ class Amount(models.Model):
     language = models.CharField(max_length=10, default="eng-uzb")
     acceptance = models.PositiveSmallIntegerField(default=0)
     question_soz = models.PositiveIntegerField(default=1)
-    profil = models.OneToOneField(Profil, on_delete=models.CASCADE, default=1)
-    # error = ArrayField(models.PositiveSmallIntegerField(), null=True)
+    profil = models.OneToOneField(Profil, on_delete=models.CASCADE)
+    question_lar = models.CharField(max_length=3010, default="[]")
+    book = models.PositiveSmallIntegerField(default=1)
     def __str__(self):
         return f"{self.amount_number} / {self.amount}"
