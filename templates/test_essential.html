@@ -81,17 +81,7 @@
         /* add these two styles */
 
 
-        .aa2 {
-          position: absolute;
-          top: 0;
-          right: 1;
-        }
 
-        .aa1 {
-          position: initial;
-          top: 0;
-          left: 0;
-        }
 
         .btn {
   box-sizing: border-box;
@@ -159,13 +149,36 @@
 .third:hover {
   box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
 }
+        .aa2 {
+          position: absolute;
+          top: 0;
+          right: 1;
+        }
 
+        .aa1 {
+          position: initial;
+          top: 0;
+          left: 0;
+        }
+        .right-aligned {
+    text-align: right;
+    display: flex;
+    flex-direction: column-reverse;
+  }
     </style>
 </head>
 <body>
     <div class="aa2"><h3 style="color:#fff;">{{amount_number}} / {{amount}}</h3></div>
     <div class="aa1"><h3 style="color:#fff;">acceptance: {{acceptance}}</h3></div>
+<br>
 
+{% if error %}
+    <div class="right-aligned">
+      <h3 style="color:rgb(255, 0, 0);">{{error}}</h3>
+    </div>
+{% else %} 
+<br>
+{% endif %}
 
     <form action="/test_essential/" method="post">{% csrf_token %}
     <h1 style="color: blue; font-size: 100px;">{{word}}</h1>

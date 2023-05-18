@@ -19,22 +19,7 @@ urlpatterns = [
     path('test_essential/', test_essential),
     path('result/', result)
 ]
-"""
->>LIST ga ma'lumot qo'shish:
-amount_instance = Amount.objects.get(id=1)
-amount_instance.error = [1, 2, 3] # ma'lumotni qo'shish
-amount_instance.save() #
 
->>LIST ma'lumotini o'qish:
-amount_instance = Amount.objects.get(id=1)
-my_error_list = amount_instance.error
-print(my_error_list[0])
-
->>Yo'q manzilga so'rov yuborilsa:
-def custom_404(request, exception):
-    # do something
-    return render(request, '404.html', status=404)
-"""
 
 
 """  <<<<<<<< Keyinchalik o'qishim kerak >>>>>>

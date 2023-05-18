@@ -17,26 +17,27 @@ def test_essential(request):
             if amount[0].language == "eng-uzb":
                 soz = request.POST.get('soz')
                 if soz:
-                    respons = Soz.objects.filter(name=soz)[0]
+                    # respons = Soz.objects.filter(name=soz)[0]
+                    respons = list(Soz.objects.filter(name=soz).values_list('word__name', flat=True))
                     q_s = amount[0].question_soz
 
                     question_lar_1 = eval(amount[0].question_lar)
 
-                    if respons.word.name == Word.objects.get(id=q_s).name:
+                    if Word.objects.get(id=q_s).name in respons:
                         amount.update(acceptance=F('acceptance') + 1)
 
                         # Har bir testni {q_s: "t") ya'ni qaysi so'zni topgan topmaganini yozib ketadi
                         question_lar_1.append(q_s)
                         question_lar_1.append("t")
-                        amount.update(question_lar=question_lar_1)
+                        amount.update(question_lar=f"{question_lar_1}")
                     else:
                         Profil.objects.filter(user=request.user).update(rejection=F('rejection') + 0.5)
 
                         # Har bir testni {q_s: "f") ya'ni qaysi so'zni topgan topmaganini yozib ketadi
                         question_lar_1.append(q_s)
                         question_lar_1.append("f")
-                        amount.update(question_lar=question_lar_1)
-                eng_uzb(request=request)
+                        amount.update(question_lar=f"{question_lar_1}")
+                # eng_uzb(request=request)
 
             elif amount[0].language == "uzb-eng":
                 soz = request.POST.get('soz')
@@ -51,26 +52,39 @@ def test_essential(request):
                         # Har bir testni {q_s: "t") ya'ni qaysi so'zni topgan topmaganini yozib ketadi
                         question_lar_1.append(q_s)
                         question_lar_1.append("t")
-                        amount.update(question_lar=question_lar_1)
+                        amount.update(question_lar=f"{question_lar_1}")
                     else:
                         Profil.objects.filter(user=request.user).update(rejection=F('rejection') + 0.5)
 
                         # Har bir testni {q_s: "f") ya'ni qaysi so'zni topgan topmaganini yozib ketadi
                         question_lar_1.append(q_s)
                         question_lar_1.append("f")
-                        amount.update(question_lar=question_lar_1)
-                uzb_eng(request=request)
+                        amount.update(question_lar=f"{question_lar_1}")
+                # uzb_eng(request=request)
 
         # Agar testlar soni marta test yechib bo'lgan bo'lsa o'yinni tugatish uchun:
         amount = Amount.objects.filter(profil__user=request.user)
         if amount[0].amount < amount[0].amount_number:
             return redirect('/result/')
 
+        # agar belgilagan testi xato bo'lsa Lug'at chiqishi uchun:
+        question_lar = eval(amount[0].question_lar)
+        data = {"error": False}
+        if question_lar:
+            if question_lar[-1] == "f":
+                data = {"error": question_lar[-2]}
+
         if amount[0].language == "eng-uzb":
-            return render(request, "test_essential.html", eng_uzb(request=request))
+            if data["error"]:
+                data["error"] = f"{Word.objects.get(id=data['error']).name} - {Soz.objects.filter(word=Word.objects.get(id=data['error']))[0].name}"
+            data.update(eng_uzb(request=request))
+            return render(request, "test_essential.html", data)
 
         elif amount[0].language == "uzb-eng":
-            return render(request, "test_essential.html", uzb_eng(request=request))
+            if data["error"]:
+                data["error"] = f"{Soz.objects.get(id=data['error']).name} - {Soz.objects.filter(id=data['error'])[0].word.name}"
+            data.update(uzb_eng(request=request))
+            return render(request, "test_essential.html", data)
 
     return redirect('/')
 

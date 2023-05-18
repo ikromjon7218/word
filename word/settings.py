@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mainapp',
     'userapp',
+    'memorization',
     'drf_yasg',
 ]
 

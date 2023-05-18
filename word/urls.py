@@ -5,6 +5,7 @@ urlpatterns = [
     path('admin_panel/', admin.site.urls),
     path('', include('userapp.urls')),
     path('', include('mainapp.urls')),
+    path('', include('memorization.urls')),
 
 ]
 
